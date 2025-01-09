@@ -11,7 +11,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  id-token: write
+  contents: write
 
 name: CI
 
@@ -84,3 +85,8 @@ jobs:
       with:
         name: shell-binaries
         path: ${{ github.workspace }}/src/shell/dotnet/Shell/bin/Release/net6.0-windows/
+
+    - name: Component detection 
+      uses: advanced-security/component-detection-dependency-submission-action@v0.0.4
+      with:
+        detectorsFilter: "Npm,NuGet"
